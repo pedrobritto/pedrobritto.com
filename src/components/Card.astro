@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  body?: string;
+  href: string;
+}
+
+const { href, title, body } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="cursor-pointer rounded-xl border px-6 py-5 transition hover:border-zinc-800 dark:border-zinc-600 dark:hover:border-zinc-200"
+>
+  <h3 class="text-xl font-bold tracking-tight">
+    {title}
+  </h3>
+
+  {body ? <p class="mt-2 text-zinc-700 dark:text-zinc-300">{body}</p> : null}
+</a>
