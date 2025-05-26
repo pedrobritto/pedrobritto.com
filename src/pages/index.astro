@@ -6,28 +6,47 @@ import Card from "../components/Card.astro";
 <Layout title="Pedro Britto | Software Developer">
   <main class="mx-auto mt-14 w-full max-w-lg self-center p-4">
     <header class="mb-10">
-      <h1 class="mb-4 text-center text-5xl font-black md:text-6xl">
+      <h1 class="mb-4 text-center text-5xl font-normal md:text-6xl">
         Pedro Britto
       </h1>
-      <div class="text-center text-xl">Software developer, specialized on web frontend.</div>
+      <div class="text-center text-lg opacity-80">
+        Software developer, 7+ years of experience on front end for&nbsp;web.
+      </div>
     </header>
 
     <div class="grid gap-10">
       <section class="flex flex-col gap-4">
-        <Card title="Blog" href="https://blog.pedrobritto.com" body="" />
         <Card title="Github" href="https://github.com/pedrobritto" />
         <Card
           title="LinkedIn"
           href="https://www.linkedin.com/in/pedro-britto/"
         />
+        <Card
+          title="Blog"
+          body="Tech and random thoughts"
+          href="https://blog.pedrobritto.com"
+        />
       </section>
 
       <section>
-        <h2 class="mb-6 text-center text-3xl font-bold tracking-tight">
-          Side Projects
-        </h2>
+        <header class="mb-6">
+          <h2 class="text-center text-3xl font-normal tracking-tight">Tools</h2>
+          <div class="text-center text-lg opacity-80">
+            and small things I've built
+          </div>
+        </header>
 
         <div class="flex flex-col gap-4">
+          <Card
+            title="Price per volume (pt-BR)"
+            body="Compare prices of different products per volume or weight"
+            href="https://precos.pedrobritto.com"
+          />
+          <Card
+            title="Set Tracker"
+            body="Track your sets rest times for your exercises"
+            href="https://gvt.pedrobritto.com"
+          />
           <Card
             title="Life in Weeks"
             body="Type in your birthdate and see your life in weeks as dots"
