@@ -4,23 +4,24 @@ import Card from "../components/Card.astro";
 ---
 
 <Layout title="Pedro Britto | Software Developer">
-  <main class="mx-auto mt-14 w-full max-w-lg self-center p-4">
+  <main class="mx-auto mt-14 w-full max-w-lg self-center p-4 md:max-w-3xl">
     <header class="mb-10">
-      <h1 class="mb-4 text-center text-5xl font-normal md:text-6xl">
+      <h1
+        class="mb-2 text-center font-serif text-5xl tracking-tight md:text-6xl">
         Pedro Britto
       </h1>
-      <div class="text-center text-lg opacity-80">
+      <div class="text-center opacity-80">
         Software developer, 7+ years of experience on front end for&nbsp;web.
       </div>
     </header>
 
-    <div class="grid gap-10">
-      <section class="flex flex-col gap-4">
-        <Card title="Github" href="https://github.com/pedrobritto" />
+    <div class="grid gap-10 md:gap-16">
+      <section class="grid gap-4 md:grid-cols-2">
         <Card
           title="LinkedIn"
           href="https://www.linkedin.com/in/pedro-britto/"
         />
+        <Card title="Github" href="https://github.com/pedrobritto" />
         <Card
           title="Blog"
           body="Tech and random thoughts"
@@ -29,27 +30,61 @@ import Card from "../components/Card.astro";
       </section>
 
       <section>
-        <header class="mb-6">
-          <h2 class="text-center text-3xl font-normal tracking-tight">Tools</h2>
-          <div class="text-center text-lg opacity-80">
-            and small things I've built
-          </div>
+        <header class="mb-6 md:mb-10">
+          <h2 class="text-center font-serif text-4xl">
+            Companies I've worked for
+          </h2>
         </header>
 
-        <div class="flex flex-col gap-4">
+        <div class="grid gap-4 md:grid-cols-2">
+          <Card
+            title="Petco Love"
+            body=" A nonprofit saving pet lives through adoption, reunification, and grants"
+            href="https://petcolove.org/"
+            current
+          />
+          <Card
+            title="Petco.com"
+            body="A pet health and wellness company offering products, services, and vet care"
+            href="https://petco.com/"
+          />
+          <Card
+            title="AirVet"
+            body="24/7 virtual vet care connecting pet owners to licensed veterinarians"
+            href="https://airvet.com/"
+          />
+          <Card
+            title="Amazing Athletes"
+            body="Youth sports programs building fitness, skills, and confidence"
+            href="https://amazingathletes.com/"
+          />
+        </div>
+      </section>
+
+      <section>
+        <header class="mb-6 md:mb-10">
+          <h2 class="text-center font-serif text-4xl">Personal Projects</h2>
+        </header>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <Card
+            title="Aporte Certo"
+            body="Tools to help with investing decisions"
+            href="https://financas.pedrobritto.com"
+          />
           <Card
             title="Set Tracker"
-            body="Track your sets rest times for your exercises"
+            body="Track your sets and rest times for your exercises"
             href="https://settracker.pedrobritto.com"
           />
           <Card
-            title="Price per volume (pt-BR)"
+            title="Price per volume"
             body="Compare prices of different products per volume or weight"
             href="https://precos.pedrobritto.com"
           />
           <Card
-            title="Life in Weeks"
-            body="Type in your birthdate and see your life in weeks as dots"
+            title="Life in Dots"
+            body="Type in your birthdate and see your life in dots"
             href="https://lifeindots.pedrobritto.com"
           />
         </div>

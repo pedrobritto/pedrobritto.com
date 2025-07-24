@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+:root {
+  --font-serif: "DM Serif Text", serif;
+  --font-sans: "Inter Variable", sans-serif;
+}
+
+@theme inline {
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
