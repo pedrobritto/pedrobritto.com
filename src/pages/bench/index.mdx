@@ -199,7 +199,8 @@ function stats(arr) {
 4. Run the script and take notes.
 
 ```sh
-## Tests
+## yarn test simulation
+
 # 8 threads
 time node bench.js --iters=200 --threads=8 --size=1000000
 
@@ -209,8 +210,19 @@ time node bench.js --iters=400 --threads=4 --size=1000000
 # 1 thread
 time node bench.js --iters=1600 --threads=1 --size=1000000
 
-## Build
-time node bench.js --iters=800 --threads=2 --size=750000
+## yarn build simulation
+time node bench.js --iters=800 --threads=2 --size=749999
+
+## Unlimited (based on yarn test)
+
+# 13600k
+time node bench.js --iters=80 --threads=20 --size=1000000
+
+# Air M4 and Pro M4 base
+time node bench.js --iters=160 --threads=10 --size=1000000
+
+# M4 Pro
+time node bench.js --iters=133 --threads=12 --size=1000000
 ```
 </main>
 </Layout>
