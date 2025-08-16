@@ -156,7 +156,7 @@ function stats(arr) {
   const workers = [];
   const results = [];
 
-  for (let i = 0; i <Layout threads; i++) {
+  for (let i = 0; i < threads; i++) {
     workers.push(new Promise((resolve, reject) => {
       const w = new Worker(__filename, { workerData: { iters, size, seed: seed != null ? (seed + i) : null } });
       w.on("message", (m) => resolve(m));
