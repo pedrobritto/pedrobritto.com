@@ -38,16 +38,28 @@ vim bench.js
 //   node sort_iter_bench.js --iters=10 --threads=8 --size=200000
 
 const os = require("os");
-const { Worker, isMainThread, parentPort, workerData } = require("worker_threads");
+const {
+  Worker,
+  isMainThread,
+  parentPort,
+  workerData,
+} = require("worker_threads");
 const crypto = require("crypto");
 
 function parseArgs() {
   const args = process.argv.slice(2);
-  const out = { iters: null, threads: os.cpus().length, size: 131072, seed: null };
+  const out = {
+    iters: null,
+    threads: os.cpus().length,
+    size: 131072,
+    seed: null,
+  };
   for (const a of args) {
     const [k, v] = a.replace(/^--/, "").split("=");
     if (k === "iters") out.iters = parseInt(v, 10);
-    else if (k === "threads") out.threads = Math.max(1, parseInt(v, 10));
+    else if (k === "threads")
+      out.threads = out.threads =
+        parseInt(v, 10) > out.threads ? out.threads : parseInt(v, 10);
     else if (k === "size") out.size = Math.max(1024, parseInt(v, 10));
     else if (k === "seed") out.seed = parseInt(v, 10);
   }
@@ -64,9 +76,12 @@ function makePRNG(seed) {
   if (x === 0) x = 0x9e3779b9; // avoid zero
   return function rand32() {
     // xorshift32
-    x ^= x << 13; x >>>= 0;
-    x ^= x >> 17; x >>>= 0;
-    x ^= x << 5;  x >>>= 0;
+    x ^= x << 13;
+    x >>>= 0;
+    x ^= x >> 17;
+    x >>>= 0;
+    x ^= x << 5;
+    x >>>= 0;
     return x;
   };
 }
@@ -82,13 +97,17 @@ function heapSort(a) {
       if (l < n && a[l] > a[largest]) largest = l;
       if (r < n && a[r] > a[largest]) largest = r;
       if (largest === i) break;
-      const t = a[i]; a[i] = a[largest]; a[largest] = t;
+      const t = a[i];
+      a[i] = a[largest];
+      a[largest] = t;
       i = largest;
     }
   };
   for (let i = (n >> 1) - 1; i >= 0; i--) heapify(n, i);
   for (let i = n - 1; i > 0; i--) {
-    const t = a[0]; a[0] = a[i]; a[i] = t;
+    const t = a[0];
+    a[0] = a[i];
+    a[i] = t;
     heapify(i, 0);
   }
 }
@@ -104,8 +123,12 @@ function makeRandomArray(prng, size) {
 }
 
 // High-resolution timer helpers
-function nowNs() { return process.hrtime.bigint(); }
-function nsToMs(ns) { return Number(ns) / 1e6; }
+function nowNs() {
+  return process.hrtime.bigint();
+}
+function nsToMs(ns) {
+  return Number(ns) / 1e6;
+}
 
 if (!isMainThread) {
   const { iters, size, seed } = workerData;
@@ -144,25 +167,49 @@ function stats(arr) {
   return { n, mean, min, max, std };
 }
 
+const numberFormatter = new Intl.NumberFormat("en-US", {
+  style: "decimal",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
+});
+
 (async function main() {
   const { iters, threads, size, seed } = parseArgs();
 
-  console.log(`# Node ${process.version} on ${os.type()} ${os.release()} (${os.arch()})`);
-  console.log(`# logical CPUs: ${os.cpus().length}; model: ${os.cpus()[0]?.model || "unknown"}`);
-  console.log(`# workload: heap-sort, array size=${size}, iterations per worker=${iters}`);
-  console.log(`# threads=${threads}  seed=${seed ?? "(random)"}  start=${new Date().toISOString()}`);
+  console.log(
+    `# Node ${process.version} on ${os.type()} ${os.release()} (${os.arch()})`
+  );
+  console.log(
+    `# logical CPUs: ${os.cpus().length}; model: ${
+      os.cpus()[0]?.model || "unknown"
+    }`
+  );
+  console.log(
+    `# workload: heap-sort, array size=${size}, iterations per worker=${iters}`
+  );
+  console.log(
+    `# threads=${threads}  seed=${
+      seed ?? "(random)"
+    }  start=${new Date().toISOString()}`
+  );
 
   const tStart = process.hrtime.bigint();
   const workers = [];
   const results = [];
 
   for (let i = 0; i < threads; i++) {
-    workers.push(new Promise((resolve, reject) => {
-      const w = new Worker(__filename, { workerData: { iters, size, seed: seed != null ? (seed + i) : null } });
-      w.on("message", (m) => resolve(m));
-      w.on("error", reject);
-      w.on("exit", (code) => { if (code !== 0) reject(new Error("Worker exited " + code)); });
-    }));
+    workers.push(
+      new Promise((resolve, reject) => {
+        const w = new Worker(__filename, {
+          workerData: { iters, size, seed: seed != null ? seed + i : null },
+        });
+        w.on("message", (m) => resolve(m));
+        w.on("error", reject);
+        w.on("exit", (code) => {
+          if (code !== 0) reject(new Error("Worker exited " + code));
+        });
+      })
+    );
   }
 
   for (const p of workers) results.push(await p);
@@ -183,16 +230,25 @@ function stats(arr) {
   console.log("\n=== Results ===");
   console.log(`Workers           : ${threads}`);
   console.log(`Iterations total  : ${iters * threads}`);
-  console.log(`Array size        : ${size}`);
-  console.log(`Wall time (ms)    : ${wallMs.toFixed(2)}`);
-  console.log(`Throughput        : ${elemsPerSec} elements/s (aggregate)`);
-  console.log(`Per-iteration ms  : mean=${s.mean.toFixed(3)}  std=${s.std.toFixed(3)}  min=${s.min.toFixed(3)}  max=${s.max.toFixed(3)}`);
-  console.log("Note: per-iteration values are distribution of all worker iterations.");
+  console.log(`Array size        : ${numberFormatter.format(size)}`);
+  console.log(`Wall time (ms)    : ${numberFormatter.format(wallMs)}`);
+  console.log(
+    `Throughput        : ${numberFormatter.format(
+      elemsPerSec
+    )} elements/s (aggregate)`
+  );
+  console.log(
+    `Per-iteration ms  : mean=${s.mean.toFixed(3)}  std=${s.std.toFixed(
+      3
+    )}  min=${s.min.toFixed(3)}  max=${s.max.toFixed(3)}`
+  );
+  console.log(
+    "Note: per-iteration values are distribution of all worker iterations."
+  );
 
   // Optional: print a compact timeline per worker (commented out to stay quiet)
-  // results.forEach((r, i) => console.log(`# worker ${i}: ${r.perIterMs.map(x=>x.toFixed(2)).join(",")}`));
+  // results.forEach((r, i) => console.log(`# worker ${i}: ${r.perIterMs.map(x => x.toFixed(2)).join(",")}`));
 })();
-
 ```
 
 <br/>
@@ -211,7 +267,7 @@ time node bench.js --iters=400 --threads=4 --size=1000000
 time node bench.js --iters=1600 --threads=1 --size=1000000
 
 ## yarn build simulation
-time node bench.js --iters=800 --threads=2 --size=749999
+time node bench.js --iters=800 --threads=2 --size=750000
 
 ## Unlimited (based on yarn test)
 
