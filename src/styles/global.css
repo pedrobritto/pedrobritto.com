@@ -3,9 +3,11 @@
 :root {
   --font-serif: "DM Serif Text", serif;
   --font-sans: "Inter Variable", sans-serif;
+  --font-mono: 'Chivo Mono Variable', monospace;
 }
 
 @theme inline {
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }

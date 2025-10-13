@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import "@fontsource/dm-serif-text";
 import "@fontsource-variable/inter";
+import "@fontsource-variable/chivo-mono";
 
 interface Props {
   title: string;
@@ -27,7 +28,7 @@ const { title } = Astro.props;
   </head>
 
   <body
-    class="bg-slate-50 pb-10 font-sans text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+    class="dark bg-slate-50 pb-10 font-mono text-slate-800 dark:bg-slate-900 dark:text-slate-100">
     <slot />
   </body>
 </html>

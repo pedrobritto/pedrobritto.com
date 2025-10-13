@@ -14,8 +14,11 @@ const { href, title, body, current } = Astro.props;
   target="_blank"
   rel="noopener noreferrer"
   class="cursor-pointer rounded-xl bg-slate-200/50 px-6 py-5 transition hover:bg-slate-200/20 dark:bg-slate-800 dark:hover:bg-slate-800/50">
-  <h3 class="flex items-center gap-2 text-lg font-bold tracking-tight">
-    {title}
+  <h3 class="flex items-center gap-2 text-lg tracking-tight">
+    <span
+      class="text-amber-700 underline decoration-dashed underline-offset-3 dark:text-amber-400"
+      >{title}</span
+    >
     {
       current ? (
         <span class="rounded-full bg-purple-200 px-1.5 py-0.5 text-xs font-normal text-purple-900">
@@ -27,7 +30,7 @@ const { href, title, body, current } = Astro.props;
 
   {
     body ? (
-      <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">{body}</p>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">{body}</p>
     ) : null
   }
 </a>
