@@ -1,88 +1,83 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+
+const workItems = [
+  {
+    name: "Petco Love",
+    description:
+      "A nonprofit saving pet lives through adoption, reunification, and grants",
+    href: "https://petcolove.org/lost",
+    active: true,
+  },
+  {
+    name: "Petco.com",
+    description:
+      "A pet health and wellness company offering products, services, and vet care",
+    href: "https://petco.com/",
+  },
+  {
+    name: "AirVet",
+    description:
+      "24/7 virtual vet care connecting pet owners to licensed veterinarians",
+    href: "https://airvet.com/",
+  },
+  {
+    name: "Amazing Athletes",
+    description:
+      "Youth sports programs building fitness, skills, and confidence",
+    href: "https://amazingathletes.com/",
+  },
+];
+
+const projectItems = [
+  {
+    name: "Set Tracker",
+    description: "Track your sets and rest times for your exercises",
+    href: "https://settracker.pedrobritto.com",
+  },
+  {
+    name: "Price per volume",
+    description: "Compare prices of different products per volume or weight",
+    href: "https://precos.pedrobritto.com",
+  },
+  {
+    name: "Life in Dots",
+    description: "Type in your birthdate and see your life in dots",
+    href: "https://lifeindots.pedrobritto.com",
+  },
+];
 ---
 
-<Layout title="Pedro Britto | Software Developer">
-  <main class="mx-auto mt-14 w-full max-w-lg self-center p-4 md:max-w-3xl">
-    <header class="mb-10">
-      <h1 class="mb-2 text-center text-5xl tracking-tight md:text-6xl">
-        Pedro Britto
-      </h1>
-      <div class="text-center opacity-80">
-        Software developer, 7+ years of experience on front end for&nbsp;web.
+<BaseLayout
+  title="Pedro Britto | Software Engineer"
+  description="8+ YoE in Web Development">
+  <main class="">
+    <Container>
+      <div>
+        <h1>Software Engineer with 8 years of experience.</h1>
       </div>
-    </header>
 
-    <div class="grid gap-10 md:gap-16">
-      <section class="grid gap-4 md:grid-cols-2">
-        <Card
-          title="LinkedIn"
-          href="https://www.linkedin.com/in/pedro-britto/"
-        />
-        <Card title="Github" href="https://github.com/pedrobritto" />
-        <Card title="X/Twitter" href="https://x.com/pibritto/" />
-        <Card title="Blog" href="https://blog.pedrobritto.com" />
+      <section class="mt-10">
+        <h2 class="text-2xl font-medium italic">Latest Posts</h2>
+
+        <div>See all...</div>
       </section>
 
-      <section>
-        <header class="mb-6 md:mb-10">
-          <h2 class="text-center text-4xl">Work experience</h2>
-        </header>
+      <section class="mt-10">
+        <h2 class="mb-6 text-2xl font-medium italic">Projects</h2>
 
-        <div class="grid gap-4 md:grid-cols-2">
-          <Card
-            title="Petco Love"
-            body=" A nonprofit saving pet lives through adoption, reunification, and grants"
-            href="https://petcolove.org/"
-            current
-          />
-          <Card
-            title="Petco.com"
-            body="A pet health and wellness company offering products, services, and vet care"
-            href="https://petco.com/"
-          />
-          <Card
-            title="AirVet"
-            body="24/7 virtual vet care connecting pet owners to licensed veterinarians"
-            href="https://airvet.com/"
-          />
-          <Card
-            title="Amazing Athletes"
-            body="Youth sports programs building fitness, skills, and confidence"
-            href="https://amazingathletes.com/"
-          />
+        <div class="grid">
+          {
+            projectItems.map((item) => (
+              <a href={item.href} class="group border-b border-dotted border-stone-300 mb-4 pb-4">
+                <div class="font-bold group-hover:text-red-700 transition-all">{item.name}</div>
+                <div class="text-stone-500 group-hover:text-stone-600 transition-all">{item.description}</div>
+              </a>
+            ))
+          }
         </div>
       </section>
-
-      <section>
-        <header class="mb-6 md:mb-10">
-          <h2 class="text-center text-4xl">Personal Projects</h2>
-        </header>
-
-        <div class="grid gap-4 md:grid-cols-2">
-          <Card
-            title="Aporte Certo"
-            body="Tools to help with investing decisions"
-            href="https://financas.pedrobritto.com"
-          />
-          <Card
-            title="Set Tracker"
-            body="Track your sets and rest times for your exercises"
-            href="https://settracker.pedrobritto.com"
-          />
-          <Card
-            title="Price per volume"
-            body="Compare prices of different products per volume or weight"
-            href="https://precos.pedrobritto.com"
-          />
-          <Card
-            title="Life in Dots"
-            body="Type in your birthdate and see your life in dots"
-            href="https://lifeindots.pedrobritto.com"
-          />
-        </div>
-      </section>
-    </div>
+    </Container>
   </main>
-</Layout>
+</BaseLayout>

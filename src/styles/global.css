@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --font-serif: "DM Serif Text", serif;
-  --font-sans: "Inter Variable", sans-serif;
+  --font-serif: "Vollkorn", serif;
+  --font-sans: "Work Sans Variable", sans-serif;
+  --font-display: 'Roboto Condensed', sans-serif;
   --font-mono: 'Chivo Mono Variable', monospace;
 }
 
 @theme inline {
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
   --font-mono: var(--font-mono);
 }
