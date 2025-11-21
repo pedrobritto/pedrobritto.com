@@ -56,45 +56,46 @@ const projectItems = [
   description="8+ YoE in Web Development">
   <main class="">
     <Container>
-      <HomeSection title="">
-        <div class="space-y-4">
-          <div>
-            <h1 class="inline font-bold">
-              I'm a Software Engineer with 8 years of experience.
-            </h1>
-            <p class="inline text-pretty">
-              Expert in building performant and pixel perfect front-ends using
-              TypeScript, Next.js, React and other tools. Currently working at <a
-                href="https://petcolove.org/lost/"
-                class="underline">Petco Love</a
-              >.
+      <div class="space-y-14">
+        <HomeSection title="">
+          <div class="space-y-6">
+            <div class="">
+              <h1 class="inline font-bold">
+                I'm a Software Engineer with 8 years of experience.
+              </h1>
+              <p class="inline text-pretty">
+                Expert in building performant and pixel perfect front-ends using
+                TypeScript, Next.js, React and other tools. Currently working at <a
+                  href="https://petcolove.org/lost/"
+                  class="underline">Petco Love</a
+                >.
+              </p>
+            </div>
+
+            <p class="">
+              You can find me at <a
+                href="https://www.linkedin.com/in/pedro-britto/"
+                class="underline">LinkedIn</a
+              >, <a href="https://github.com/pedrobritto" class="underline"
+                >GitHub</a
+              > and
+              <a href="https://x.com/pibritto/" class="underline">X</a>.
+            </p>
+
+            <p class="">
+              <a href="/resume" class="underline">Click here for my resume</a>.
             </p>
           </div>
+        </HomeSection>
 
-          <p class="">
-            You can find me at <a
-              href="https://www.linkedin.com/in/pedro-britto/"
-              class="underline">LinkedIn</a
-            >, <a href="https://github.com/pedrobritto" class="underline"
-              >GitHub</a
-            > and
-            <a href="https://x.com/pibritto/" class="underline">X</a>.
-          </p>
+        <HomeSection title="Latest Posts">
+          <div>Soon</div>
+        </HomeSection>
 
-          <p class="">
-            <a href="/resume" class="underline">Click here for my resume</a
-            >.
-          </p>
-        </div>
-      </HomeSection>
-
-      <HomeSection title="Latest Posts">
-        <div>Soon</div>
-      </HomeSection>
-
-      <HomeSection title="Personal Projects">
-        {projectItems.map((item) => <ItemLink {...item} />)}
-      </HomeSection>
+        <HomeSection title="Personal Projects">
+          {projectItems.map((item) => <ItemLink {...item} />)}
+        </HomeSection>
+      </div>
     </Container>
   </main>
 </BaseLayout>
