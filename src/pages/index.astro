@@ -1,31 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
+import ItemLink from "../components/ItemLink.astro";
+import HomeSection from "../components/HomeSection.astro";
 
 const workItems = [
   {
     name: "Petco Love",
     description:
-      "A nonprofit saving pet lives through adoption, reunification, and grants",
+      "A nonprofit saving pet lives through adoption, reunification, and grants.",
     href: "https://petcolove.org/lost",
     active: true,
   },
   {
     name: "Petco.com",
     description:
-      "A pet health and wellness company offering products, services, and vet care",
+      "A pet health and wellness company offering products, services, and vet care.",
     href: "https://petco.com/",
   },
   {
     name: "AirVet",
     description:
-      "24/7 virtual vet care connecting pet owners to licensed veterinarians",
+      "24/7 virtual vet care connecting pet owners to licensed veterinarians.",
     href: "https://airvet.com/",
   },
   {
     name: "Amazing Athletes",
     description:
-      "Youth sports programs building fitness, skills, and confidence",
+      "Youth sports programs building fitness, skills, and confidence.",
     href: "https://amazingathletes.com/",
   },
 ];
@@ -33,17 +35,17 @@ const workItems = [
 const projectItems = [
   {
     name: "Set Tracker",
-    description: "Track your sets and rest times for your exercises",
+    description: "Track your sets and rest times for your exercises.",
     href: "https://settracker.pedrobritto.com",
   },
   {
     name: "Price per volume",
-    description: "Compare prices of different products per volume or weight",
+    description: "Compare prices of different products per volume or weight.",
     href: "https://precos.pedrobritto.com",
   },
   {
     name: "Life in Dots",
-    description: "Type in your birthdate and see your life in dots",
+    description: "Type in your birthdate and see your life in dots.",
     href: "https://lifeindots.pedrobritto.com",
   },
 ];
@@ -54,30 +56,30 @@ const projectItems = [
   description="8+ YoE in Web Development">
   <main class="">
     <Container>
-      <div>
-        <h1>Software Engineer with 8 years of experience.</h1>
-      </div>
+      <HomeSection title="Work Experience">
+        <h1 class="inline font-bold">
+          Software Engineer with 8 years of experience.
+        </h1>
+        <p class="inline">
+          Expertise in front-end development using TypeScript, Next.js, React
+          and other tools. Currently working at <a
+            href="https://petcolove.org/lost/"
+            class="underline">Petco Love</a
+          >.
+        </p>
 
-      <section class="mt-10">
-        <h2 class="text-2xl font-medium italic">Latest Posts</h2>
+        <p class="mt-4">
+          <a href="/resume" class="underline">Click here for my full resume</a>.
+        </p>
+      </HomeSection>
 
+      <HomeSection title="Latest Posts">
         <div>See all...</div>
-      </section>
+      </HomeSection>
 
-      <section class="mt-10">
-        <h2 class="mb-6 text-2xl font-medium italic">Projects</h2>
-
-        <div class="grid">
-          {
-            projectItems.map((item) => (
-              <a href={item.href} class="group border-b border-dotted border-stone-300 mb-4 pb-4">
-                <div class="font-bold group-hover:text-red-700 transition-all">{item.name}</div>
-                <div class="text-stone-500 group-hover:text-stone-600 transition-all">{item.description}</div>
-              </a>
-            ))
-          }
-        </div>
-      </section>
+      <HomeSection title="Personal Projects">
+        {projectItems.map((item) => <ItemLink {...item} />)}
+      </HomeSection>
     </Container>
   </main>
 </BaseLayout>
