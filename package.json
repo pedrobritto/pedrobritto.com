@@ -11,9 +11,8 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.11",
-    "@fontsource-variable/chivo-mono": "^5.2.8",
+    "@fontsource-variable/literata": "^5.2.8",
     "@fontsource-variable/oswald": "^5.2.8",
-    "@fontsource-variable/vollkorn": "^5.2.10",
     "@fontsource-variable/work-sans": "^5.2.8",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.15.9",

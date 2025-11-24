@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --font-serif: "Vollkorn", serif;
+  --font-serif: "Literata Variable", serif;
   --font-sans: "Work Sans Variable", sans-serif;
-  --font-display: 'Roboto Condensed', sans-serif;
+  --font-display: 'Oswald Variable', sans-serif;
   --font-mono: 'Chivo Mono Variable', monospace;
 }
 

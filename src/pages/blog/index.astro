@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import BlogPostLink from "../../components/BlogPostLink.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout>
+  <main>
+    <Container>
+      <section>
+        <ul>
+          {
+            posts.map((post) => (
+              <BlogPostLink
+                name={post.data.title}
+                href={`/blog/${post.id}`}
+                description={post.data.description}
+                date={post.data.pubDate}
+              />
+            ))
+          }
+        </ul>
+      </section>
+    </Container>
+  </main>
+</BaseLayout>
