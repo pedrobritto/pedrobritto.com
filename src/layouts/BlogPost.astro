@@ -1,7 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import BaseLayout from "./BaseLayout.astro";
 import Container from "../components/Container.astro";
@@ -14,7 +12,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <BaseLayout title={`Pedro Britto | Blog | ${title}`} description={description}>
   <Container>
     <article>
-      <div class="prose-lg">
+      <div class="prose prose-stone prose-lg dark:prose-invert prose-headings:font-medium">
         <header>
           <div>
             <FormattedDate date={pubDate} />
@@ -26,7 +24,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
               )
             }
           </div>
-          <h1 class="font-bold">{title}</h1>
+          <h1 class="font-medium">{title}</h1>
         </header>
 
         <slot />
