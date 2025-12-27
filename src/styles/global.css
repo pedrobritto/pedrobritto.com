@@ -3,7 +3,7 @@
 
 :root {
   --font-serif: "Literata Variable", serif;
-  --font-sans: "Work Sans Variable", sans-serif;
+  --font-sans: "Open Sans Variable", sans-serif;
   --font-display: 'Oswald Variable', sans-serif;
   --font-mono: 'Chivo Mono Variable', monospace;
 }
@@ -13,4 +13,8 @@
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --font-mono: var(--font-mono);
+}
+
+a:hover{
+  @apply hover:text-red-700 dark:hover:text-red-400 transition-colors;
 }
