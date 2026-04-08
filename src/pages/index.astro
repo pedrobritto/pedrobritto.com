@@ -7,6 +7,8 @@ import HomeSection from "../components/HomeSection.astro";
 const workItems = [
   {
     name: "Petco Love",
+    yearStart: 2024,
+    yearEnd: "Present",
     description:
       "A nonprofit saving pet lives through adoption, reunification, and grants.",
     href: "https://petcolove.org/lost",
@@ -61,13 +63,14 @@ const projectItems = [
           <div class="space-y-6">
             <div class="">
               <h1 class="inline font-bold">
-                I'm a Software Engineer with 8 years of experience.
+                I'm a Software Engineer with 8 years of experience,
               </h1>
               <p class="inline text-pretty">
-                Expert in building performant and pixel perfect front-ends using
-                TypeScript, Next.js, React and other tools. Currently working
-                with <a href="https://petcolove.org/lost/" class="underline"
-                  >Petco Love</a
+                specialized in building performant and pixel perfect User
+                Interfaces using TypeScript, Next.js, React and other tools.
+                Currently working with <a
+                  href="https://petcolove.org/lost/"
+                  class="underline">Petco Love</a
                 >.
               </p>
             </div>
@@ -81,19 +84,19 @@ const projectItems = [
               > and
               <a href="https://x.com/pibritto/" class="underline">X</a>.
             </p>
-
-            <p class="">
-              <a href="/resume" class="underline">Click here for my resume</a>.
-            </p>
           </div>
+        </HomeSection>
+
+        <HomeSection title="Latest from Blog" seeAllUrl="/blog">
+          <p class="mb-4 italic">Coming soon...</p>
+        </HomeSection>
+
+        <HomeSection title="Personal Projects" seeAllUrl="/projects">
+          {projectItems.map((item) => <ItemLink {...item} />)}
         </HomeSection>
 
         <HomeSection title="Work Experience">
           {workItems.map((item) => <ItemLink {...item} />)}
-        </HomeSection>
-
-        <HomeSection title="Personal Projects">
-          {projectItems.map((item) => <ItemLink {...item} />)}
         </HomeSection>
       </div>
     </Container>

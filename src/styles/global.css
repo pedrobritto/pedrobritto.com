@@ -16,5 +16,5 @@
 }
 
 a:hover{
-  @apply hover:text-red-700 dark:hover:text-red-400 transition-colors;
+  @apply hover:text-orange-500 transition-all;
 }

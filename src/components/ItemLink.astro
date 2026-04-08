@@ -1,17 +1,26 @@
 ---
-const { href, name, description, badge } = Astro.props;
+const { href, name, description, yearStart, yearEnd } = Astro.props;
 ---
 
 <a
   href={href}
   target="_blank"
   class="group mb-4 block border-b border-dotted border-stone-300 pb-4 dark:border-stone-700">
-  <div
-    class="font-bold transition-all group-hover:text-red-700 dark:group-hover:text-red-400">
-    {name}
+  <div class="flex items-center gap-4">
+    <div
+      class="font-bold transition-all group-hover:text-orange-700 dark:group-hover:text-orange-400">
+      {name}
+    </div>
+
+    {
+      yearStart && yearEnd && (
+        <div class="text-sm text-stone-500 italic transition-all dark:text-stone-400">
+          {yearStart} → {yearEnd}
+        </div>
+      )
+    }
   </div>
-  <div
-    class="text-base text-stone-500 transition-all dark:text-stone-400">
+  <div class="text-base text-stone-500 transition-all dark:text-stone-400">
     {description}
   </div>
 </a>
