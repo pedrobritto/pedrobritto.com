@@ -1,26 +1,34 @@
 ---
+interface Props {
+  href: string;
+  name: string;
+  description: string;
+  yearStart?: string;
+  yearEnd?: string;
+}
+
 const { href, name, description, yearStart, yearEnd } = Astro.props;
 ---
 
 <a
   href={href}
   target="_blank"
-  class="group mb-4 block border-b border-dotted border-stone-300 pb-4 dark:border-stone-700">
+  class="group block border-b editorial-rule py-6">
   <div class="flex items-center gap-4">
     <div
-      class="font-bold transition-all group-hover:text-orange-700 dark:group-hover:text-orange-400">
+      class="font-serif text-2xl font-semibold transition-colors group-hover:text-accent-warm">
       {name}
     </div>
 
     {
       yearStart && yearEnd && (
-        <div class="text-sm text-stone-500 italic transition-all dark:text-stone-400">
+        <div class="font-mono text-xs uppercase tracking-[0.16em] text-ink-muted">
           {yearStart} → {yearEnd}
         </div>
       )
     }
   </div>
-  <div class="text-base text-stone-500 transition-all dark:text-stone-400">
+  <div class="mt-2 max-w-2xl font-serif text-lg leading-relaxed text-ink-muted">
     {description}
   </div>
 </a>

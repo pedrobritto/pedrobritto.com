@@ -1,27 +1,59 @@
 ---
 import FormattedDate from "./FormattedDate.astro";
 
-const { href, name, description, date } = Astro.props;
+interface Props {
+  href: string;
+  name: string;
+  description: string;
+  date?: Date;
+  index?: number;
+  featured?: boolean;
+}
+
+const { href, name, description, date, index, featured = false } = Astro.props;
+const formattedIndex = index ? index.toString().padStart(2, "0") : null;
 ---
 
 <a
   href={href}
-  class="group mb-4 block border-b border-dotted border-stone-300 pb-4 dark:border-stone-700">
-  <div
-    class="font-medium transition-all group-hover:text-orange-700 dark:group-hover:text-orange-400">
-    {name}
-  </div>
-
-  <div
-    class="mt-1 text-base text-stone-500 transition-all group-hover:text-stone-600 dark:text-stone-400 dark:group-hover:text-stone-300">
-    {description}
-  </div>
-
+  class:list={[
+    "group grid border-b editorial-rule transition-colors",
+    featured
+      ? "gap-5 py-8 sm:grid-cols-[6rem_1fr] sm:py-10"
+      : "gap-4 py-7 sm:grid-cols-[5rem_1fr]",
+  ]}>
   {
-    date && (
-      <div class="mt-2 text-sm text-stone-500 transition-all dark:text-stone-400">
-        <FormattedDate date={date} />
+    formattedIndex && (
+      <div
+        class:list={[
+          "font-mono leading-none text-ink-muted transition-colors group-hover:text-accent",
+          featured ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl",
+        ]}>
+        {formattedIndex}
       </div>
     )
   }
+
+  <div>
+    <div
+      class:list={[
+        "font-serif font-semibold leading-tight text-ink transition-colors group-hover:text-accent-warm",
+        featured ? "text-4xl sm:text-5xl" : "text-3xl",
+      ]}>
+      {name}
+    </div>
+
+    <div
+      class="mt-3 max-w-2xl font-serif text-lg leading-relaxed text-ink-muted transition-colors group-hover:text-ink">
+      {description}
+    </div>
+
+    {
+      date && (
+        <div class="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
+          <FormattedDate date={date} />
+        </div>
+      )
+    }
+  </div>
 </a>

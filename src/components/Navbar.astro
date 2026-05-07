@@ -2,28 +2,24 @@
 import Container from "./Container.astro";
 ---
 
-<div class="border-b border-stone-200 dark:border-stone-700">
+<div class="border-b editorial-rule">
   <Container>
-    <div class="flex items-center justify-between py-4 lg:py-7">
+    <div class="flex items-center justify-between py-5">
       <div
-        class="text-xl font-bold text-orange-400 lg:text-lg dark:text-orange-400">
-        <a href="/" class="">Pedro Britto</a>
+        class="font-serif text-2xl font-semibold tracking-normal text-ink sm:text-3xl">
+        <a href="/">Pedro Britto</a>
       </div>
 
-      <div class="space-x-2 text-base">
+      <nav
+        aria-label="Primary navigation"
+        class="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.22em] text-ink-muted sm:gap-6">
         <!-- <a
-          class="px-1 transition-colors hover:text-orange-700 dark:hover:text-orange-400"
+          class="transition-colors"
           href="/resume">Resume</a
         > -->
-        <a
-          class="px-1 transition-colors hover:text-orange-700 dark:hover:text-orange-400"
-          href="/blog">Blog</a
-        >
-        <a
-          class="px-1 transition-colors hover:text-orange-700 dark:hover:text-orange-400"
-          href="/projects">Projects</a
-        >
-      </div>
+        <a href="/blog">Blog</a>
+        <a href="/projects">Projects</a>
+      </nav>
     </div>
   </Container>
 </div>

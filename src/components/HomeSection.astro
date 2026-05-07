@@ -1,21 +1,32 @@
 ---
+interface Props {
+  title?: string;
+  seeAllUrl?: string;
+}
+
 const { title, seeAllUrl } = Astro.props;
 ---
 
-<section>
-  <div class="mb-6">
-    <h2 class="font-serif text-3xl font-medium">{title}</h2>
-  </div>
+<section class:list={[title ? "border-t editorial-rule pt-10" : ""]}>
+  {
+    title && (
+      <div class="mb-8 flex items-end justify-between gap-6">
+        <h2 class="font-serif text-4xl font-semibold leading-none text-ink">
+          {title}
+        </h2>
+
+        {seeAllUrl && (
+          <a
+            href={seeAllUrl}
+            class="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
+            See all
+          </a>
+        )}
+      </div>
+    )
+  }
 
   <div>
     <slot />
   </div>
-
-  {
-    seeAllUrl && (
-      <a href={seeAllUrl} class="font-bold">
-        See all &rarr;
-      </a>
-    )
-  }
 </section>

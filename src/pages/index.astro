@@ -26,28 +26,34 @@ const projectItems = [
 
 const latestBlogPosts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+  .slice(0, 10);
 ---
 
 <BaseLayout
   title="Pedro Britto | Software Engineer"
   description="Software Engineering and other human endeavors.">
-  <main class="">
+  <main>
     <Container>
-      <div class="space-y-14">
+      <div class="space-y-20 py-14 sm:py-20">
         <HomeSection title="">
-          <div class="space-y-6">
-            <div class="">
-              <h1 class="inline font-bold">
+          <div class="max-w-4xl space-y-8">
+            <div>
+              <p
+                class="mb-5 font-mono text-xs uppercase tracking-[0.22em] text-accent-warm">
+                Software engineering and other human endeavors
+              </p>
+              <h1
+                class="inline font-serif text-5xl font-semibold leading-tight text-ink sm:text-7xl">
                 I'm a Software Engineer with 8 years of experience,
               </h1>
-              <p class="inline text-pretty">
+              <p
+                class="inline font-serif text-4xl leading-tight text-ink-muted sm:text-6xl">
                 specialized in building performant and pixel perfect User
                 Interfaces using TypeScript, Next.js, React and other tools.
               </p>
             </div>
 
-            <p class="">
+            <p class="max-w-2xl text-base leading-relaxed text-ink-muted">
               You can find me at <a
                 href="https://www.linkedin.com/in/pedro-britto/"
                 class="underline">LinkedIn</a
@@ -62,16 +68,17 @@ const latestBlogPosts = (await getCollection("blog"))
         <HomeSection title="Latest from Blog" seeAllUrl="/blog">
           {
             latestBlogPosts.length > 0 ? (
-              latestBlogPosts.map((post) => (
+              latestBlogPosts.map((post, index) => (
                 <BlogPostLink
                   name={post.data.title}
                   href={`/blog/${post.id}`}
                   description={post.data.description}
                   date={post.data.pubDate}
+                  index={index + 1}
                 />
               ))
             ) : (
-              <p class="mb-4 italic">No blog posts yet.</p>
+              <p class="font-serif text-ink-muted italic">No blog posts yet.</p>
             )
           }
         </HomeSection>

@@ -6,29 +6,47 @@ import Container from "../components/Container.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
 <BaseLayout title={`Pedro Britto | Blog | ${title}`} description={description}>
-  <Container>
-    <article>
-      <div class="prose prose-stone prose-lg dark:prose-invert prose-headings:font-medium">
-        <header>
-          <div>
+  <main class="py-14 sm:py-20">
+    <Container>
+      <article class="mx-auto max-w-3xl">
+        <header class="mb-14 border-b editorial-rule pb-10">
+          <a
+            href="/blog"
+            class="font-mono text-xs uppercase tracking-[0.22em] text-ink-muted">
+            Blog
+          </a>
+
+          <h1
+            class="mt-7 font-serif text-5xl font-semibold leading-tight text-ink sm:text-7xl">
+            {title}
+          </h1>
+
+          <p class="mt-5 max-w-2xl font-serif text-xl leading-relaxed text-ink-muted">
+            {description}
+          </p>
+
+          <div
+            class="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
             <FormattedDate date={pubDate} />
             {
               updatedDate && (
-                <div class="last-updated-on">
-                  Last updated on <FormattedDate date={updatedDate} />
-                </div>
+                <span>
+                  {" "}
+                  / Updated <FormattedDate date={updatedDate} />
+                </span>
               )
             }
           </div>
-          <h1 class="font-medium">{title}</h1>
         </header>
 
-        <slot />
-      </div>
-    </article>
-  </Container>
+        <div class="editorial-prose">
+          <slot />
+        </div>
+      </article>
+    </Container>
+  </main>
 </BaseLayout>

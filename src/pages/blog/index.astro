@@ -7,24 +7,66 @@ import BlogPostLink from "../../components/BlogPostLink.astro";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const featuredPost = posts[0];
 ---
 
-<BaseLayout>
-  <main>
+<BaseLayout
+  title="Pedro Britto | Blog"
+  description="Latest writing from Pedro Britto.">
+  <main class="py-14 sm:py-20">
     <Container>
-      <section>
-        <ul>
+      <section class="min-h-[72vh] text-center">
+        <p
+          class="font-mono text-xs uppercase tracking-[0.24em] text-ink-muted">
+          Latest writing
+        </p>
+        <h1
+          class="mt-6 font-serif text-7xl font-semibold leading-none text-ink sm:text-8xl lg:text-[11rem]">
+          Pedro Britto
+        </h1>
+
+        {
+          featuredPost && (
+            <div class="mx-auto mt-20 max-w-4xl">
+              <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">
+                Latest post
+              </p>
+              <a href={`/blog/${featuredPost.id}`} class="group mt-5 block">
+                <h2 class="font-serif text-5xl font-semibold leading-tight text-ink transition-colors group-hover:text-accent-warm sm:text-7xl">
+                  {featuredPost.data.title}
+                </h2>
+                <p class="mx-auto mt-6 max-w-2xl font-serif text-xl leading-relaxed text-ink-muted">
+                  {featuredPost.data.description}
+                </p>
+              </a>
+            </div>
+          )
+        }
+      </section>
+
+      <section class="mx-auto max-w-5xl border-t editorial-rule pt-12">
+        <div class="mb-8 text-center">
+          <h2
+            class="font-mono text-xs uppercase tracking-[0.24em] text-ink-muted">
+            Latest posts
+          </h2>
+        </div>
+
+        <div>
           {
-            posts.map((post) => (
+            posts.map((post, index) => (
               <BlogPostLink
                 name={post.data.title}
                 href={`/blog/${post.id}`}
                 description={post.data.description}
                 date={post.data.pubDate}
+                index={index + 1}
+                featured={index === 0}
               />
             ))
           }
-        </ul>
+        </div>
       </section>
     </Container>
   </main>
