@@ -1,38 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
+import BlogPostLink from "../components/BlogPostLink.astro";
 import ItemLink from "../components/ItemLink.astro";
 import HomeSection from "../components/HomeSection.astro";
-
-const workItems = [
-  {
-    name: "Petco Love",
-    yearStart: 2024,
-    yearEnd: "Present",
-    description:
-      "A nonprofit saving pet lives through adoption, reunification, and grants.",
-    href: "https://petcolove.org/lost",
-    active: true,
-  },
-  {
-    name: "Petco.com",
-    description:
-      "A pet health and wellness company offering products, services, and vet care.",
-    href: "https://petco.com/",
-  },
-  {
-    name: "AirVet",
-    description:
-      "24/7 virtual vet care connecting pet owners to licensed veterinarians.",
-    href: "https://airvet.com/",
-  },
-  {
-    name: "Amazing Athletes",
-    description:
-      "Youth sports programs building fitness, skills, and confidence.",
-    href: "https://amazingathletes.com/",
-  },
-];
 
 const projectItems = [
   {
@@ -51,6 +23,10 @@ const projectItems = [
     href: "https://lifeindots.pedrobritto.com",
   },
 ];
+
+const latestBlogPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
 ---
 
 <BaseLayout
@@ -68,10 +44,6 @@ const projectItems = [
               <p class="inline text-pretty">
                 specialized in building performant and pixel perfect User
                 Interfaces using TypeScript, Next.js, React and other tools.
-                Currently working with <a
-                  href="https://petcolove.org/lost/"
-                  class="underline">Petco Love</a
-                >.
               </p>
             </div>
 
@@ -88,15 +60,24 @@ const projectItems = [
         </HomeSection>
 
         <HomeSection title="Latest from Blog" seeAllUrl="/blog">
-          <p class="mb-4 italic">Coming soon...</p>
+          {
+            latestBlogPosts.length > 0 ? (
+              latestBlogPosts.map((post) => (
+                <BlogPostLink
+                  name={post.data.title}
+                  href={`/blog/${post.id}`}
+                  description={post.data.description}
+                  date={post.data.pubDate}
+                />
+              ))
+            ) : (
+              <p class="mb-4 italic">No blog posts yet.</p>
+            )
+          }
         </HomeSection>
 
         <HomeSection title="Personal Projects" seeAllUrl="/projects">
           {projectItems.map((item) => <ItemLink {...item} />)}
-        </HomeSection>
-
-        <HomeSection title="Work Experience">
-          {workItems.map((item) => <ItemLink {...item} />)}
         </HomeSection>
       </div>
     </Container>
