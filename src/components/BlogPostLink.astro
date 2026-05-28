@@ -19,20 +19,9 @@ const formattedIndex = index ? index.toString().padStart(2, "0") : null;
   class:list={[
     "group grid border-b editorial-rule transition-colors",
     featured
-      ? "gap-5 py-8 sm:grid-cols-[6rem_1fr] sm:py-10"
-      : "gap-4 py-7 sm:grid-cols-[5rem_1fr]",
+      ? "gap-5 py-8 sm:py-10"
+      : "gap-4 py-7",
   ]}>
-  {
-    formattedIndex && (
-      <div
-        class:list={[
-          "font-mono leading-none text-ink-muted transition-colors group-hover:text-accent",
-          featured ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl",
-        ]}>
-        {formattedIndex}
-      </div>
-    )
-  }
 
   <div>
     <div
@@ -44,13 +33,13 @@ const formattedIndex = index ? index.toString().padStart(2, "0") : null;
     </div>
 
     <div
-      class="mt-3 max-w-2xl font-serif text-lg leading-relaxed text-ink-muted transition-colors group-hover:text-ink">
+      class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-muted transition-colors group-hover:text-ink">
       {description}
     </div>
 
     {
       date && (
-        <div class="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
+        <div class="mt-4 text-xs uppercase tracking-[0.18em] text-ink-muted">
           <FormattedDate date={date} />
         </div>
       )

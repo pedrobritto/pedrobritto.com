@@ -11,14 +11,14 @@ const { title, seeAllUrl } = Astro.props;
   {
     title && (
       <div class="mb-8 flex items-end justify-between gap-6">
-        <h2 class="font-serif text-4xl font-semibold leading-none text-ink">
+        <h2 class="font-serif text-4xl md:text-5xl leading-none text-ink">
           {title}
         </h2>
 
         {seeAllUrl && (
           <a
             href={seeAllUrl}
-            class="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
+            class="text-xs uppercase tracking-[0.18em] text-ink-muted">
             See all
           </a>
         )}

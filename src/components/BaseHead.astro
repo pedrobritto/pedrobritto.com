@@ -4,10 +4,11 @@ import type { ImageMetadata } from "astro";
 import FallbackImage from "../assets/blog-placeholder-1.jpg";
 import { SITE_META } from "../consts";
 
-// Supports weights 200-900
-import "@fontsource-variable/literata";
-// Supports weights 300-800
-import '@fontsource-variable/open-sans';
+// Supports weights 400-800
+import "@fontsource-variable/eb-garamond/wght-italic.css";
+import "@fontsource-variable/eb-garamond/wght.css";
+// Supports weights 100-700
+import '@fontsource-variable/ibm-plex-sans/wght.css';
 
 interface Props {
   title: string;
@@ -54,3 +55,11 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<script
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id="0a9ab9e5-c803-45f4-95b4-5431cbe99df2"
+  data-performance="true"
+  data-domains="pedrobritto.com">
+</script>

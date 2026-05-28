@@ -16,7 +16,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
         <header class="mb-14 border-b editorial-rule pb-10">
           <a
             href="/blog"
-            class="font-mono text-xs uppercase tracking-[0.22em] text-ink-muted">
+            class="text-xs uppercase tracking-[0.22em] text-ink-muted">
             Blog
           </a>
 
@@ -30,7 +30,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
           </p>
 
           <div
-            class="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
+            class="mt-8 text-xs uppercase tracking-[0.18em] text-ink-muted">
             <FormattedDate date={pubDate} />
             {
               updatedDate && (
