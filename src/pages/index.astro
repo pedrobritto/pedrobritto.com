@@ -36,19 +36,43 @@ const latestBlogPosts = (await getCollection("blog"))
     <Container>
       <div class="space-y-20 py-14 sm:py-20">
         <HomeSection title="">
-          <div class="max-w-4xl">
-            <div class="font-serif leading-tight text-ink tracking-tight space-y-4 md:space-y-6">
-              <h1 class="text-5xl italic">
-                Hi, I'm <span class="text-ink font-semibold">Pedro&nbsp;Britto</span>.
+          <div>
+            <div
+              class="text-ink space-y-4 font-serif leading-tight tracking-tight md:space-y-6">
+              <h1 class="text-5xl">
+                Hi, I'm <span class="text-ink font-semibold"
+                  >Pedro&nbsp;Britto</span
+                >!
               </h1>
 
-              <div class="text-4xl md:text-5xl text-ink-muted">
-                A <span class="text-ink">Software Engineer</span>,
-                specialized in building pretty and performant <span class="text-ink">user interfaces</span>. Currently helping reunite lost pets at <a href="https://petcolove.org/lost" class="underline italic decoration-1 underline-offset-4 text-ink">Petco Love</a>
+              <div class="text-ink-muted text-3xl md:text-4xl">
+                <p>
+                  A <span class="text-ink">Software Engineer</span>, specialized
+                  in building pretty and performant <span class="text-ink"
+                    >user interfaces</span
+                  >.
+                </p>
+
+                <p class="mt-4">
+                  Currently helping reunite lost pets at <a
+                    href="https://petcolove.org/lost"
+                    class="text-ink underline decoration-1 underline-offset-4"
+                    >Petco Love</a
+                  >
+                </p>
               </div>
 
-              <div class="font-sans text-ink-muted">I also like Writing (besides programming), Reading sci-fi, Baking breads, Cooking in general, and fixing things.</div>
+              <div class="text-ink-muted font-sans">
+                I also enjoy writing, reading sci-fi, baking bread, cooking, and
+                fixing things.
+              </div>
             </div>
+          </div>
+        </HomeSection>
+
+        <HomeSection title="Personal Projects" seeAllUrl="/projects">
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {projectItems.map((item) => <ItemLink {...item} />)}
           </div>
         </HomeSection>
 
@@ -65,13 +89,9 @@ const latestBlogPosts = (await getCollection("blog"))
                 />
               ))
             ) : (
-              <p class="font-serif text-ink-muted italic">No blog posts yet.</p>
+              <p class="text-ink-muted font-serif">No blog posts yet.</p>
             )
           }
-        </HomeSection>
-
-        <HomeSection title="Personal Projects" seeAllUrl="/projects">
-          {projectItems.map((item) => <ItemLink {...item} />)}
         </HomeSection>
       </div>
     </Container>
