@@ -1,88 +1,99 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import BlogPostLink from "../components/BlogPostLink.astro";
+import ItemLink from "../components/ItemLink.astro";
+import HomeSection from "../components/HomeSection.astro";
+
+const projectItems = [
+  {
+    name: "Set Tracker",
+    description: "Track your sets and rest times for your exercises.",
+    href: "https://settracker.pedrobritto.com",
+  },
+  {
+    name: "Price per volume",
+    description: "Compare prices of different products per volume or weight.",
+    href: "https://precos.pedrobritto.com",
+  },
+  {
+    name: "Life in Dots",
+    description: "Type in your birthdate and see your life in dots.",
+    href: "https://lifeindots.pedrobritto.com",
+  },
+];
+
+const latestBlogPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 10);
 ---
 
-<Layout title="Pedro Britto | Software Developer">
-  <main class="mx-auto mt-14 w-full max-w-lg self-center p-4 md:max-w-3xl">
-    <header class="mb-10">
-      <h1 class="mb-2 text-center text-5xl tracking-tight md:text-6xl">
-        Pedro Britto
-      </h1>
-      <div class="text-center opacity-80">
-        Software developer, 7+ years of experience on front end for&nbsp;web.
+<BaseLayout
+  title="Pedro Britto | Software Engineer"
+  description="Software Engineering and other human endeavors.">
+  <main>
+    <Container>
+      <div class="space-y-20 py-14 sm:py-20">
+        <HomeSection title="">
+          <div>
+            <div
+              class="text-ink space-y-4 font-serif leading-tight tracking-tight md:space-y-6">
+              <h1 class="text-5xl">
+                Hi, I'm <span class="text-ink font-semibold"
+                  >Pedro&nbsp;Britto</span
+                >!
+              </h1>
+
+              <div class="text-ink-muted text-3xl md:text-4xl">
+                <p>
+                  A <span class="text-ink">Software Engineer</span>, specialized
+                  in building pretty and performant <span class="text-ink"
+                    >user interfaces</span
+                  >.
+                </p>
+
+                <p class="mt-4">
+                  Currently helping reunite lost pets at <a
+                    href="https://petcolove.org/lost"
+                    class="text-ink underline decoration-1 underline-offset-4"
+                    >Petco Love</a
+                  >
+                </p>
+              </div>
+
+              <div class="text-ink-muted font-sans">
+                I also enjoy writing, reading sci-fi, baking bread, cooking, and
+                fixing things.
+              </div>
+            </div>
+          </div>
+        </HomeSection>
+
+        <HomeSection title="Personal Projects" seeAllUrl="/projects">
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {projectItems.map((item) => <ItemLink {...item} />)}
+          </div>
+        </HomeSection>
+
+        <HomeSection title="Latest from Blog" seeAllUrl="/blog">
+          {
+            latestBlogPosts.length > 0 ? (
+              latestBlogPosts.map((post, index) => (
+                <BlogPostLink
+                  name={post.data.title}
+                  href={`/blog/${post.id}`}
+                  description={post.data.description}
+                  date={post.data.pubDate}
+                  index={index + 1}
+                />
+              ))
+            ) : (
+              <p class="text-ink-muted font-serif">No blog posts yet.</p>
+            )
+          }
+        </HomeSection>
       </div>
-    </header>
-
-    <div class="grid gap-10 md:gap-16">
-      <section class="grid gap-4 md:grid-cols-2">
-        <Card
-          title="LinkedIn"
-          href="https://www.linkedin.com/in/pedro-britto/"
-        />
-        <Card title="Github" href="https://github.com/pedrobritto" />
-        <Card title="X/Twitter" href="https://x.com/pibritto/" />
-        <Card title="Blog" href="https://blog.pedrobritto.com" />
-      </section>
-
-      <section>
-        <header class="mb-6 md:mb-10">
-          <h2 class="text-center text-4xl">Work experience</h2>
-        </header>
-
-        <div class="grid gap-4 md:grid-cols-2">
-          <Card
-            title="Petco Love"
-            body=" A nonprofit saving pet lives through adoption, reunification, and grants"
-            href="https://petcolove.org/"
-            current
-          />
-          <Card
-            title="Petco.com"
-            body="A pet health and wellness company offering products, services, and vet care"
-            href="https://petco.com/"
-          />
-          <Card
-            title="AirVet"
-            body="24/7 virtual vet care connecting pet owners to licensed veterinarians"
-            href="https://airvet.com/"
-          />
-          <Card
-            title="Amazing Athletes"
-            body="Youth sports programs building fitness, skills, and confidence"
-            href="https://amazingathletes.com/"
-          />
-        </div>
-      </section>
-
-      <section>
-        <header class="mb-6 md:mb-10">
-          <h2 class="text-center text-4xl">Personal Projects</h2>
-        </header>
-
-        <div class="grid gap-4 md:grid-cols-2">
-          <Card
-            title="Aporte Certo"
-            body="Tools to help with investing decisions"
-            href="https://financas.pedrobritto.com"
-          />
-          <Card
-            title="Set Tracker"
-            body="Track your sets and rest times for your exercises"
-            href="https://settracker.pedrobritto.com"
-          />
-          <Card
-            title="Price per volume"
-            body="Compare prices of different products per volume or weight"
-            href="https://precos.pedrobritto.com"
-          />
-          <Card
-            title="Life in Dots"
-            body="Type in your birthdate and see your life in dots"
-            href="https://lifeindots.pedrobritto.com"
-          />
-        </div>
-      </section>
-    </div>
+    </Container>
   </main>
-</Layout>
+</BaseLayout>

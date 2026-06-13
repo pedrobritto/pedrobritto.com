@@ -1,0 +1,48 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  href: string;
+  name: string;
+  description: string;
+  date?: Date;
+  index?: number;
+  featured?: boolean;
+}
+
+const { href, name, description, date, index, featured = false } = Astro.props;
+const formattedIndex = index ? index.toString().padStart(2, "0") : null;
+---
+
+<a
+  href={href}
+  class:list={[
+    "group grid border-b editorial-rule transition-colors",
+    featured
+      ? "gap-5 py-8 sm:py-10"
+      : "gap-4 py-7",
+  ]}>
+
+  <div>
+    <div
+      class:list={[
+        "font-serif font-semibold leading-tight text-ink transition-colors group-hover:text-accent-warm",
+        featured ? "text-4xl sm:text-5xl" : "text-3xl",
+      ]}>
+      {name}
+    </div>
+
+    <div
+      class="mt-3 max-w-2xl text-lg leading-relaxed text-ink-muted transition-colors group-hover:text-ink">
+      {description}
+    </div>
+
+    {
+      date && (
+        <div class="mt-4 text-xs uppercase tracking-[0.18em] text-ink-muted">
+          <FormattedDate date={date} />
+        </div>
+      )
+    }
+  </div>
+</a>

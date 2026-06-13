@@ -1,0 +1,31 @@
+---
+import Navbar from "../components/Navbar.astro";
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_META } from "../consts";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={title || SITE_META.title}
+      description={description || SITE_META.description}
+    />
+  </head>
+
+  <body
+    class="min-h-screen bg-paper pb-16 font-sans text-lg text-ink antialiased dark:bg-paper dark:text-ink">
+    <Navbar />
+
+    <div>
+      <slot />
+    </div>
+  </body>
+</html>
